@@ -20,7 +20,7 @@ int* varArray(int n){
 int main(){
 
     int num =233345;
-    int i,j,count;
+    int i,j,count=0;
     int *array;
     while(num!=0){
         i=num%10;
