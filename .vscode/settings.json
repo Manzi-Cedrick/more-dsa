@@ -2,7 +2,8 @@
   "files.associations": {
     "iostream": "cpp",
     "new": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "vector": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
