@@ -1,85 +1,84 @@
 #include <iostream>
+#include <stdexcept>
 using namespace std;
-template <typename T>
 
+template <typename T>
 class Stack
 {
 private:
-    T *arr;
-    int nextIndex;
-    int capacity;
+    class Node
+    {
+    public:
+        T data;
+        Node *next;
+        Node(T data)
+        {
+            this->data = data;
+            this->next = nullptr;
+        }
+    };
+    Node *head;
+    int size;
 
 public:
-    Stack(int element)
+    Stack()
     {
-        capacity = element;
-        nextIndex = 0;
-        arr = new T[5];
+        head = nullptr;
+        size = 0;
     }
-    void push(T element)
-    {
-        if (nextIndex == capacity)
-        {
-            cout << "Stack overflow";
-        }
-        else
-        {
-            T *newArray = new T[capacity*2];
-            for (int i = 0; i < capacity; i++)
-            {
-                newArray[i] = arr[i];
-            }
-            delete []arr;
-            arr=newArray;
-            capacity=capacity*2;
-            arr[nextIndex] = element;
-            nextIndex++;
-        }
-    }
-    int size()
-    {
-        return nextIndex;
-    }
+
     bool isEmpty()
     {
-        bool check;
-        nextIndex == 0 ? check = true : check = false;
-        return check;
+        return size == 0;
     }
+
+    int getSize()
+    {
+        return size;
+    }
+
+    void push(T data)
+    {
+        Node *newNode = new Node(data);
+        newNode->next = head;
+        head = newNode;
+        size++;
+    }
+
     T top()
     {
-        if(isEmpty()){
-            cout << "Underflow integer" << endl;
-            return 0;
+        if (isEmpty())
+        {
+            throw std::runtime_error("Stack underflow");
         }
-        return arr[nextIndex - 1];
+        return head->data;
     }
+
     void pop()
     {
         if (isEmpty())
         {
-            cout << "Stack underflow " << endl;
-        } else
-        {
-            nextIndex--;
+            throw std::runtime_error("Stack underflow");
         }
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        size--;
     }
 };
 int main()
 {
-    Stack<int> s(10);
-    Stack<char> cs(10);
+    Stack<int> s;
+    Stack<string> names;
     s.push(10);
     s.push(20);
+    s.push(30);
+    s.push(40);
     s.push(50);
-    s.push(60);
-    s.push(80);
-    s.push(800);
-    cs.push(96);
-    cs.push(97);
-    cs.push(98);
-    cs.push(99);
-    cs.push(100);
-    cout << s.size() << endl;
-    cout << cs.top() << endl;
+    names.push("Iris");
+    names.push("Manzi");
+    names.push("Derrick");
+    cout << s.top() << endl;
+    cout << names.top() << endl;
+    return 0;
 }
