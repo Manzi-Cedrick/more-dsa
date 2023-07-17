@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stack>
 #include <string>
-
 using namespace std;
+
 
 int evaluateReversePN(string *tokens, int size) {
     stack<int> s;
@@ -35,8 +35,6 @@ int main() {
     string tokens1[] = {"2","1","+","3","*"};
     string tokens2[] = {"4","13","5","/","+"};
     int size1 = sizeof(tokens1)/sizeof(tokens1[0]);
-    int size2 = sizeof(tokens2)/sizeof(tokens2[0]);
     cout << evaluateReversePN(tokens1, size1) << endl;
-    cout << evaluateReversePN(tokens2, size2) << endl;
     return 0;
 }
